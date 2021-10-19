@@ -1,19 +1,19 @@
 import React from "react";
-import { Col, Row } from "reactstrap";
+import { Grid } from '@mui/material';
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 
 const Sign = () => {
     return (
         <>
-            <Row>
-                <Col md='6'>
+            <Grid container rowSpacing={5} columnSpacing={{ xs: 2, sm: 3, md: 4, xl: 8 }}>
+                <Grid item md={6}>
                     <SignIn />
-                </Col>
-                <Col md='6'>
+                </Grid>
+                <Grid item md={6}>
                     <SignUp />
-                </Col>
-            </Row>
+                </Grid>
+            </Grid>
         </>
     )
 }

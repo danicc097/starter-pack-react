@@ -1,5 +1,6 @@
 import React from "react";
 import { useRecoilState } from "recoil";
+import { TableRow, TableCell } from '@mui/material';
 import { cartItemsAtom } from "../store/cart";
 
 const CartResume = ({ item }) => {
@@ -27,27 +28,27 @@ const CartResume = ({ item }) => {
     }
 
     return (
-        <tr>
-             <td>
+        <TableRow>
+             <TableCell>
                 <img src={item.imageUrl} alt="img" style={{width: '170px'}} />
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 <span>{item.name}</span>
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 <span>
                     <span style={{cursor: 'pointer'}} onClick={removeItem(cartItem, item)}>&#10094;</span>
                         <span style={{margin: '0 10px'}}>{item.quantity}</span>
                     <span style={{cursor: 'pointer'}} onClick={addItem(cartItem, item)}>&#10095;</span>
                 </span>
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 <span>{item.price}$</span>
-            </td>
-            <td>
+            </TableCell>
+            <TableCell>
                 <span style={{cursor: 'pointer'}} onClick={() => setCartItem(cartItem.filter(v => v.id !== item.id))}>&#10005;</span>
-            </td>
-        </tr>
+            </TableCell>
+        </TableRow>
     )
 }
 

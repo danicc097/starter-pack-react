@@ -1,5 +1,5 @@
 import React from "react";
-import { Row } from "reactstrap";
+import { Grid } from '@mui/material';
 import { useRecoilValue } from "recoil";
 import { directoryAtom } from "../store/directory";
 import MenuItem from "./Menu-item";
@@ -14,16 +14,16 @@ const Directory = () => {
     console.log(section)
     return (
         <>
-        <Row className="mb-5 no-gutters">
+        <Grid container rowSpacing={5} columnSpacing={{ xs: 2, sm: 3, md: 4, xl: 8 }} className="mb-5 no-gutters">
             {section && section.length > 0 && section.map(v => {
                 return <MenuItem title={v.title} url={v.url} key={v.id} md={4} height={'250px'} />
             })}
-        </Row>
-        <Row className="mb-5 no-gutters">
+        </Grid>
+        <Grid container rowSpacing={5} columnSpacing={{ xs: 2, sm: 3, md: 4, xl: 8 }} className="mb-5 no-gutters">
             {section2 && section2.length > 0 && section2.map(v => {
                 return <MenuItem title={v.title} url={v.url} key={v.id} md={6} height={'350px'} />
             })}
-        </Row>
+        </Grid>
         </>
     )
 }

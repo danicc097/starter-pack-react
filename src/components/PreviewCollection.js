@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardGroup } from "reactstrap";
+import { Card, CardContent } from '@mui/material';
 import CollectionItem from "./CollectionItem";
 
 const PreviewCollection = ({title, items}) => {
@@ -7,13 +7,13 @@ const PreviewCollection = ({title, items}) => {
         <>
             <Card className="border-0 mb-4">
                 <h1>{title.toUpperCase()}</h1>
-                <CardGroup>
+                <CardContent>
                 {items && items.length > 0 && items
                     .filter((item, i) => i < 4)
                     .map((item) => {
                         return <CollectionItem key={item.id} item={item} />
                     })}
-                 </CardGroup>
+                 </CardContent>
             </Card>
         </>
     )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "reactstrap";
+import { Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import { useRecoilValue } from "recoil";
 import CartResume from "../components/CartResume";
 import { cartItemsAtom } from "../store/cart";
@@ -15,20 +15,20 @@ const Checkout = () => {
     return (
         <>
             <Table size="sm">
-                <thead>
-                    <tr>
-                    <th>Product</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Product</TableCell>
+                        <TableCell>Description</TableCell>
+                        <TableCell>Quantity</TableCell>
+                        <TableCell>Price</TableCell>
+                        <TableCell>Remove</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                 {
                     items && items.length > 0 && items.map((v, i) => <CartResume key={i} item={v} />)
                 }
-                </tbody>
+                </TableBody>
                 <h4>TOTAL: {displayItem}$</h4>
             </Table>
         </>

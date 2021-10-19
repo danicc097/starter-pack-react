@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import { Button, FormControl, Input } from '@mui/material';
 import useInput from "../Hooks/useInput.js";
 
 const styles = {
@@ -23,16 +23,16 @@ const SignIn = () => {
         <><div className="mt-5">
             <h2 className="mb-4">I already have an email</h2>
             <span>Sign In with your email and password</span>
-           <Form onSubmit={handleSubmit}>
-                <FormGroup className="mb-5 mt-5">
+           <form onSubmit={handleSubmit} className="d-flex flex-column">
+                <FormControl className="mb-5 mt-5">
                     <Input style={styles} {...email.bind} />
-                </FormGroup>
-                <FormGroup className="mb-5">
+                </FormControl>
+                <FormControl className="mb-5">
                     <Input style={styles} {...password.bind} />
-                </FormGroup>
-                <Button className="px-5 pt-3 pb-3 m-1" type='submit' outline color='dark'>Sign In</Button>
+                </FormControl>
+                <Button className="px-5 pt-3 pb-3 m-1" type='submit' variant="outlined">Sign In</Button>
                 <Button className="px-5 pt-3 pb-3" color='primary'>Sign In with Google</Button>
-           </Form>
+           </form>
         </div>
         </>
     )

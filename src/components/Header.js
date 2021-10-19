@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {
   Collapse,
-  Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
   NavLink,
 } from 'reactstrap';
+import { AppBar } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { cartHiddenAtom } from '../store/cart';
 import CartDropdown from './CartDropdow';
@@ -20,7 +20,7 @@ const Header = () => {
   const cartHidden = useRecoilValue(cartHiddenAtom)
   return (
     <div>
-      <Navbar light expand="md" className="">
+      <AppBar>
         <NavbarBrand href="/">Logo</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -40,7 +40,7 @@ const Header = () => {
             </NavItem>
           </Nav>
         </Collapse>
-      </Navbar>
+      </AppBar>
     </div>
   );
 }

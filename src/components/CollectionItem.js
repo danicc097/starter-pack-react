@@ -1,5 +1,5 @@
-import React from "react";
-import { Card, CardBody, CardImg, CardSubtitle, CardTitle, Button } from "reactstrap";
+import React, { Fragment } from "react";
+import { Card, CardMedia, Button, CardContent } from '@mui/material';
 import { useRecoilState } from "recoil";
 import { cartItemsAtom } from "../store/cart";
 
@@ -22,17 +22,23 @@ const CollectionItem = ({ item }) => {
 
     return (
         <>
-        <Card className="mx-3 border-0">
-            <CardImg top height='400px' src={imageUrl} className="product-items" />
-            <CardBody className="d-flex align-items-center justify-content-between">
+            <Card className="mx-3 border-0">
+            <CardMedia
+                className="product-items"
+                component="img"
+                height="400"
+                image={imageUrl}
+                alt="Items"
+            />
+            <CardContent className="d-flex align-items-center justify-content-between">
                 <div className="d-flex flex-column">
-                    <CardTitle tag="p">{name}</CardTitle>
-                    <CardSubtitle tag="p">{price}$</CardSubtitle>
+                    <Fragment>{name}</Fragment><br />
+                    <Fragment>{price}$</Fragment>
                 </div>
-                <Button color="dark" outline onClick={addItem(cartItem, item)}>
+                <Button varient='outline' onClick={addItem(cartItem, item)}>
                     ADD TO CART
                 </Button>
-            </CardBody>
+            </CardContent>
         </Card>
         </>
     )

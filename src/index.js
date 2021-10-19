@@ -6,6 +6,7 @@ import { RecoilRoot } from 'recoil';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 import { ProvideAuth } from './Hooks/useAuth';
+import ErrorBoundary from "./screen/ErrorBoundary";
 
 import Loader from './components/Loader'
 
@@ -16,15 +17,17 @@ const hello = `%c 👋 Hello, \n\n ✔️ Portfolio. \n ✔️ WebSite. \n ✔�
 console.info(hello, g);
 
 ReactDOM.render(
-  <Suspense fallback={<Loader />}>
-    <ProvideAuth>
-      <RecoilRoot>
-          <BrowserRouter>
-              <App />
-          </BrowserRouter>
-      </RecoilRoot>
-    </ProvideAuth>
-  </Suspense>,
+  <ErrorBoundary>
+    <Suspense fallback={<Loader />}>
+      <ProvideAuth>
+        <RecoilRoot>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </RecoilRoot>
+      </ProvideAuth>
+    </Suspense>
+  </ErrorBoundary>,
   document.getElementById('root')
 );
 
