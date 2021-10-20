@@ -11,7 +11,6 @@ const section2 = [
 
 const Directory = () => {
     const section = useRecoilValue(directoryAtom)
-    console.log(section)
     return (
         <>
         <Grid container rowSpacing={5} columnSpacing={{ xs: 2, sm: 3, md: 4, xl: 8 }} className="mb-5 no-gutters">

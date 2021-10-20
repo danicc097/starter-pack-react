@@ -1,20 +1,24 @@
 import { useState } from "react";
 
-const useInput = (initialValue, type, placeholder, className) => {
+const useInput = (initialValue, type, placeholder, className, styles = {}) => {
     const [value, setValue] = useState(initialValue);
 
     const reset = () => setValue(null);
 
-    const bind = {
-        value,
+    const bindInput = {
         placeholder,
         type,
         className: className,
         name: type,
-        onChange: e => setValue(e.target.value)
+        style: styles,
     }
 
-    return {bind, reset}
+    const bindHookForm = {
+        defaultValue: value,
+        name: type,
+    }
+
+    return {bindInput, reset, bindHookForm}
 };
 
 export default useInput;

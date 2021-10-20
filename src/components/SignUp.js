@@ -23,6 +23,7 @@ const SignUp = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         if (sign.password !== sign.confirmPassword) {
+            console.log(sign)
             alert("Password doesn't match")
             setSign({...sign, 
                 password: null,
