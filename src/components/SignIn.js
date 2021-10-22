@@ -13,7 +13,7 @@ const styles = {
 }
 
 const schema = yup.object({
-    email: yup.string().required(),
+    email: yup.string().email().required(),
     password: yup.string().required().min(7),
   }).required();
 
@@ -23,8 +23,8 @@ const SignIn = () => {
         resolver: yupResolver(schema)
     });
 
-    const email = useInput("", "email", "email...", "w-75", styles)
-    const password = useInput("", "password", "password...", "w-75", styles)
+    const email = useInput("", "email", "email", "email...", "w-75", styles)
+    const password = useInput("", "password", "password", "password...", "w-75", styles)
 
     const onSubmit = data => {
         console.log(data)
@@ -50,6 +50,7 @@ const SignIn = () => {
                         render={({ field }) => <Input {...field} {...email.bindInput} />}
                     />
                     {errors.email?.type === 'required' && <span>Email est requis</span>}
+                    {errors.email?.type === 'email' && <span>Email est fausse</span>}
                 </FormControl>
 
                 <FormControl className="mb-5">

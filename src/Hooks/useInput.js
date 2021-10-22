@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useInput = (initialValue, type, placeholder, className, styles = {}) => {
+const useInput = (initialValue, name, type, placeholder, className, styles = {}) => {
     const [value, setValue] = useState(initialValue);
 
     const reset = () => setValue(null);
@@ -9,13 +9,13 @@ const useInput = (initialValue, type, placeholder, className, styles = {}) => {
         placeholder,
         type,
         className: className,
-        name: type,
+        name: name,
         style: styles,
     }
 
     const bindHookForm = {
         defaultValue: value,
-        name: type,
+        name: name,
     }
 
     return {bindInput, reset, bindHookForm}
