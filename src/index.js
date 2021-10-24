@@ -9,6 +9,7 @@ import { ProvideAuth } from './Hooks/useAuth';
 import ErrorBoundary from "./screen/ErrorBoundary";
 
 import Loader from './components/Loader'
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const App = lazy(() => import('./App'))
 
@@ -16,13 +17,17 @@ const g = "color:#00000;font-weight:bold;font-size:18px;";
 const hello = `%c 👋 Hello, \n\n ✔️ Portfolio. \n ✔️ WebSite. \n ✔️ WebApp. \n 🤙 https://guillaume-morin.fr/`;
 console.info(hello, g);
 
+const queryClient = new QueryClient()
+
 ReactDOM.render(
   <ErrorBoundary>
     <Suspense fallback={<Loader />}>
       <ProvideAuth>
         <RecoilRoot>
             <BrowserRouter>
+              <QueryClientProvider client={queryClient}>
                 <App />
+              </QueryClientProvider>
             </BrowserRouter>
         </RecoilRoot>
       </ProvideAuth>

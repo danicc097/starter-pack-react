@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 const authContext = createContext();
 
 const api = process.env.REACT_APP_API_URL
-console.log(api)
+
 // Provider component that wraps your app and makes auth object ...
 // ... available to any child component that calls useAuth().
 export function ProvideAuth({ children }) {
@@ -138,7 +138,7 @@ function useProvideAuth() {
 			})
 		}).then(async resp => {
 			if (resp.status === 403) {
-				return await getAuthorization().then(async () => await login(email, password))
+				await getAuthorization().then(async () => await login(email, password))
 			}
 			return await resp.json()
 		}).then(body => {
@@ -163,7 +163,7 @@ function useProvideAuth() {
 			})
 		})
 		if (res.status === 403) {
-			return await getAuthorization().then(async () => await signup(reqBody))
+			return await getAuthorization().then(res => res && signup(reqBody))
 		}
 		setLoad(false)
 		return await res.json().then((resp) => {
@@ -193,7 +193,7 @@ function useProvideAuth() {
 			})
 		}).then(async resp => {
 			if (resp.status === 403) {
-				return await getAuthorization().then(async () => await lost(email))
+				await getAuthorization().then(async () => await lost(email))
 			}
 			return await resp.json()
 		}).then(body => {
@@ -216,7 +216,7 @@ function useProvideAuth() {
 			})
 		}).then(async resp => {
 			if (resp.status === 403) {
-				return await getAuthorization().then(async () => await newPassword(password, token))
+				await getAuthorization().then(async () => await newPassword(password, token))
 			}
 			return await resp.json()
 		}).then(body => {
@@ -235,7 +235,7 @@ function useProvideAuth() {
 		});
 
 		if (res.status === 403) {
-			return await getAuthorization().then(async () => await getProfile(params))
+			return await getAuthorization().then(res => res && getProfile(params))
 		}
 		return res.json()
 	}

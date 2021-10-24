@@ -1,53 +1,49 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button, FormControl, Input } from '@mui/material';
 import useInput from "../Hooks/useInput.js";
-import firebase from '../firebase'
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { useRecoilState } from "recoil";
-import { currentUserAtom } from "../store/user.js";
+import useRouter from "../Hooks/useRouter.js";
+import { useMutation } from "react-query";
+import Loader from '../components/Loader'
+import * as api from '../firebase/api'
 
 const styles = {
-        outline: '0',
-        borderWidth:'0 0 1px',
-        borderColor: 'black',
+    outline: '0',
+    borderWidth:'0 0 1px',
+    borderColor: 'black',
 }
 
-const schema = yup.object({
-    name: yup.string().min(3).required(),
-    email: yup.string().email().required(),
-    password: yup.string().required().min(7),
-    confirmPassword: yup.string().required().min(7)
-        .oneOf([yup.ref('password'), null], 'Mot de passe différent.'),
-  }).required();
-
-
 const SignUp = () => {
-    const { handleSubmit, control, formState: { errors }, reset } = useForm({
+
+    const router = useRouter()
+
+    const {mutate, isLoading, isError} = useMutation(api.SignupWithMailAndPassword, {
+        onSuccess: () => {
+            router.push('/')
+        }
+    })
+
+    const schema = yup.object({
+        name: yup.string().min(3).required(),
+        email: yup.string().email().required(),
+        password: yup.string().required().min(7),
+        confirmPassword: yup.string().required().min(7)
+            .oneOf([yup.ref('password'), null], 'Mot de passe différent.'),
+      }).required();
+
+
+    const { handleSubmit, control, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
-    const [user, setCurrentUser] = useRecoilState(currentUserAtom)
+
     const name = useInput("", "name", "text", "Nom...", "w-75", styles)
     const email = useInput("", "email", "email", "email...", "w-75", styles)
     const password = useInput("", "password", "password", "Password...", "w-75", styles)
     const confirmPassword = useInput("", "confirmPassword", "password", "Confirm...", "w-75", styles)
 
-    const onSubmit = data => {
-        console.log(data)
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(data.email, data.password)
-            .then((res) => setCurrentUser(res))
-            .then(() => {
-                reset(data)
-            })
-            .catch(err => console.error(err))
-    };
-
-    useEffect(() => {
-        console.log(user)
-    }, [user])
+    const onSubmit = data => mutate(data);
 
     return (
         <><div className="mt-5">
@@ -94,7 +90,8 @@ const SignUp = () => {
                 {errors.confirmPassword?.type === 'oneOf' && <span>Mot de passe différent</span>}
                 </FormControl>
 
-                <Button className="px-5 pt-3 pb-3 m-1" type='submit' variant="outlined">Sign Up</Button>
+                <Button className="px-5 pt-3 pb-3 m-1" type='submit' disabled={isLoading} variant="outlined">{isLoading ? <Loader /> : "SignUp"}</Button>
+                {isError && <span>Error is occurring, please retry.</span>}
             </form>
         </div>
         </>
