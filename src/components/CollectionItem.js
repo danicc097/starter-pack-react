@@ -30,11 +30,11 @@ const CollectionItem = ({ item }) => {
                     alt="Items"
                 />
                 <CardContent className="">
-                    <div className="">
+                    <div className="mb-2">
                         <Fragment>{name}</Fragment><br />
                         <Fragment>{price}$</Fragment>
                     </div>
-                    <Button varient='outline' onClick={addItem(cartItem, item)}>
+                    <Button  variant="contained" onClick={addItem(cartItem, item)}>
                         ADD TO CART
                     </Button>
                 </CardContent>

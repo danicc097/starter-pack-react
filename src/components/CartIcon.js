@@ -1,6 +1,8 @@
 import React, { memo, useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { cartHiddenAtom, cartItemsAtom } from "../store/cart";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
+
 
 const CartIcon = memo(() => {
     const [displayItem, setDisplayItem] = useState(0)
@@ -13,8 +15,10 @@ const CartIcon = memo(() => {
 
     return (
         <div onClick={() => setCartHidden(v => !v)}>
-            {/* <ShoppingCartIcon /> */}
-            <span className="">{displayItem}</span>
+            <span className="text-dark">
+                <AddShoppingCartIcon />
+                {displayItem}
+            </span>
         </div>
     )
 })

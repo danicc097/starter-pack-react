@@ -21,7 +21,7 @@ const Header = () => {
               <NavLink exact className="text-decoration-none mx-3 text-dark" to="/shop">Shop</NavLink>
               <NavLink exact className="text-decoration-none mx-3 text-dark" to="/contact">Contact</NavLink>
               <NavLink exact className="text-decoration-none mx-3 text-dark" to="/sign">Sign</NavLink>
-            <div><CartIcon /></div>
+            <div style={{cursor: 'pointer'}}><CartIcon /></div>
             {
                 cartHidden ? null : <CartDropdown />
             }

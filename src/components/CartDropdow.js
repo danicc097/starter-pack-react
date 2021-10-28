@@ -13,8 +13,7 @@ const CartDropdown = memo (() => {
 
     return (
         <>
-            <div className="cart-dropdown flex-column position-absolute d-flex">
-                <div className="cart-items d-flex flex-column overflow-scroll" />
+            <div className="cart-dropdown flex-column position-absolute d-flex overflow-auto">
                 { cartItems && cartItems.length > 0 ?
                     cartItems.map(v => {
                         return <CartItem key={v.id} item={v} />
