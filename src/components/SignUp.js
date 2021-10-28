@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, FormControl, Input } from '@mui/material';
+import { Button, FormControl, Input, Box } from '@mui/material';
 import useInput from "../Hooks/useInput.js";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,6 +8,7 @@ import useRouter from "../Hooks/useRouter.js";
 import { useMutation } from "react-query";
 import Loader from '../components/Loader'
 import * as api from '../firebase/api'
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 
 const styles = {
     outline: '0',
@@ -26,7 +27,7 @@ const SignUp = () => {
     })
 
     const schema = yup.object({
-        name: yup.string().min(3).required(),
+        name: yup.string().required().min(3),
         email: yup.string().email().required(),
         password: yup.string().required().min(7),
         confirmPassword: yup.string().required().min(7)
@@ -39,15 +40,15 @@ const SignUp = () => {
     });
 
     const name = useInput("", "name", "text", "Nom...", "w-75", styles)
-    const email = useInput("", "email", "email", "email...", "w-75", styles)
-    const password = useInput("", "password", "password", "Password...", "w-75", styles)
-    const confirmPassword = useInput("", "confirmPassword", "password", "Confirm...", "w-75", styles)
+    const email = useInput("", "email", "email", "Email...", "w-75", styles)
+    const password = useInput("", "password", "password", "Mot de passe...", "w-75", styles)
+    const confirmPassword = useInput("", "confirmPassword", "password", "Confirmer le mot de passe...", "w-75", styles)
 
     const onSubmit = data => mutate(data);
 
     return (
         <><div className="mt-5">
-            <h2 className="mb-4">Register by email</h2>
+            <h2 className="mb-4">S'inscrire</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column">
 
                 <FormControl className="mb-5 mt-5">
@@ -56,7 +57,7 @@ const SignUp = () => {
                         control={control}
                         render={({ field }) => <Input {...field} {...name.bindInput} />}
                     />
-                {errors.name?.type === 'required' && <span>Nom requis</span>}
+                {errors.name?.type === 'required' && <span className="text-danger">Nom requis</span>}
                 </FormControl>
 
                 <FormControl className="mb-5 mt-5">
@@ -65,8 +66,8 @@ const SignUp = () => {
                         control={control}
                         render={({ field }) => <Input {...field} {...email.bindInput} />}
                     />
-                {errors.email?.type === 'required' && <span>Email est requis</span>}
-                {errors.email?.type === 'email' && <span>Email est fausse</span>}
+                {errors.email?.type === 'required' && <span className="text-danger">Email requis</span>}
+                {errors.email?.type === 'email' && <span className="text-danger">Mauvais format</span>}
                 </FormControl>
 
                 <FormControl className="mb-5 mt-5">
@@ -75,8 +76,8 @@ const SignUp = () => {
                         control={control}
                         render={({ field }) => <Input {...field} {...password.bindInput} />}
                     />
-                {errors.password?.type === 'required' && <span>Mot de passe requis</span>}
-                {errors.password?.type === 'min' && <span>Trop petit</span>}
+                {errors.password?.type === 'required' && <span className="text-danger">Mot de passe requis</span>}
+                {errors.password?.type === 'min' && <span className="text-danger">Trop petit</span>}
                 </FormControl>
 
                 <FormControl className="mb-5 mt-5">
@@ -85,13 +86,15 @@ const SignUp = () => {
                         control={control}
                         render={({ field }) => <Input {...field} {...confirmPassword.bindInput} />}
                     />
-                {errors.confirmPassword?.type === 'required' && <span>Mot de passe requis</span>}
-                {errors.confirmPassword?.type === 'min' && <span>Trop petit</span>}
-                {errors.confirmPassword?.type === 'oneOf' && <span>Mot de passe différent</span>}
+                {errors.confirmPassword?.type === 'required' && <span className="text-danger">Mot de passe requis</span>}
+                {errors.confirmPassword?.type === 'min' && <span className="text-danger">Trop petit</span>}
+                {errors.confirmPassword?.type === 'oneOf' && <span className="text-danger">Mot de passe différent</span>}
                 </FormControl>
 
-                <Button className="px-5 pt-3 pb-3 m-1" type='submit' disabled={isLoading} variant="outlined">{isLoading ? <Loader /> : "SignUp"}</Button>
-                {isError && <span>Error is occurring, please retry.</span>}
+                <Button className="px-5 pt-3 pb-3 m-1" type='submit' disabled={isLoading} variant="outlined">
+                    {isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><AlternateEmailIcon /></Box>S'inscrire</>}
+                </Button>
+                {isError && <span>Une erreur est survenue. Veuillez réessayer.</span>}
             </form>
         </div>
         </>

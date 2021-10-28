@@ -21,26 +21,24 @@ const CollectionItem = ({ item }) => {
     }
 
     return (
-        <>
-            <Card className="mx-3 border-0">
-            <CardMedia
-                className="product-items"
-                component="img"
-                height="400"
-                image={imageUrl}
-                alt="Items"
-            />
-            <CardContent className="d-flex align-items-center justify-content-between">
-                <div className="d-flex flex-column">
-                    <Fragment>{name}</Fragment><br />
-                    <Fragment>{price}$</Fragment>
-                </div>
-                <Button varient='outline' onClick={addItem(cartItem, item)}>
-                    ADD TO CART
-                </Button>
-            </CardContent>
-        </Card>
-        </>
+            <Card>
+                <CardMedia
+                    className="product-items"
+                    component="img"
+                    height="400"
+                    image={imageUrl}
+                    alt="Items"
+                />
+                <CardContent className="">
+                    <div className="">
+                        <Fragment>{name}</Fragment><br />
+                        <Fragment>{price}$</Fragment>
+                    </div>
+                    <Button varient='outline' onClick={addItem(cartItem, item)}>
+                        ADD TO CART
+                    </Button>
+                </CardContent>
+            </Card>
     )
 }
 

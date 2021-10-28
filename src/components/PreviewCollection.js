@@ -1,21 +1,21 @@
 import React from "react";
-import { Card, CardContent } from '@mui/material';
+import { Grid } from '@mui/material';
 import CollectionItem from "./CollectionItem";
 
 const PreviewCollection = ({title, items}) => {
     return (
-            <Card className="border-0 mb-4">
-                <h1>{title.toUpperCase()}</h1>
-                <CardContent>
+        <Grid container spacing={2} className="mb-5">
+                <h1 className="w-100">{title.toUpperCase()}</h1>
                 {items && items.length > 0 && items
                     .filter((item, i) => i < 4)
                     .map((item) => {
                         return (
-                            <CollectionItem key={item.id} item={item} />
+                            <Grid item xs={4} md={3}>
+                                <CollectionItem key={item.id} item={item} />
+                            </Grid>
                         )
                     })}
-                 </CardContent>
-            </Card>
+        </Grid>
     )
 }
 

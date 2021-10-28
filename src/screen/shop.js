@@ -8,9 +8,10 @@ const ShopPage = memo(() => {
     const shop = useRecoilValue(collectionAtom)
     return (
         <>
-            {shop && shop.map(({ id, ...data }) => (
-                <PreviewCollection key={id} {...data} />
-            ))}
+                {shop && shop.map(({ id, ...data }) => (
+                    <PreviewCollection key={id} {...data} />
+                ))}
+
         </>
     )
 })
