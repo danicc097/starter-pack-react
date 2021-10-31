@@ -92,6 +92,6 @@ I couldn't describe all the wonderful things that Material UI has to offer in on
 
 - Paypal integration
 
-- Integration of an API made in Golang (<a href="https://github.com/gmorinn/starter-pack-goa">Starter Pack API</>)
+- Integration of an API made in Golang (<a href="https://github.com/gmorinn/starter-pack-goa">Starter Pack API</a>)
 
 - Integration of advanced concepts of Firebase
