@@ -29,8 +29,8 @@ const Checkout = () => {
                     items && items.length > 0 && items.map((v, i) => <CartResume key={i} item={v} />)
                 }
                 </TableBody>
-                <h4>TOTAL: {displayItem}$</h4>
             </Table>
+            <h4>TOTAL: {displayItem}$</h4>
         </>
     )
 }

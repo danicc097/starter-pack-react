@@ -10,8 +10,8 @@ const PreviewCollection = ({title, items}) => {
                     .filter((item, i) => i < 4)
                     .map((item) => {
                         return (
-                            <Grid item xs={4} md={3}>
-                                <CollectionItem key={item.id} item={item} />
+                            <Grid item xs={6} md={3} key={item.id} >
+                                <CollectionItem item={item} />
                             </Grid>
                         )
                     })}

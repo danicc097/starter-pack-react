@@ -1,11 +1,11 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useRecoilValue } from "recoil";
 import { collectionAtom } from "../store/shop";
 import PreviewCollection from "./PreviewCollection";
 
 
-const CollectionOverview = memo(() => {
+const CollectionOverview = () => {
     const { id } = useParams()
     const [collection, setCollection] = useState([])
     const collections = useRecoilValue(collectionAtom)
@@ -19,6 +19,6 @@ const CollectionOverview = memo(() => {
             {collection && collection.length > 0 && <PreviewCollection {...collection[0]} />}
         </>
     )
-})
+}
 
 export default CollectionOverview

@@ -1,10 +1,10 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { cartHiddenAtom, cartItemsAtom } from "../store/cart";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 
 
-const CartIcon = memo(() => {
+const CartIcon = () => {
     const [displayItem, setDisplayItem] = useState(0)
     const setCartHidden = useSetRecoilState(cartHiddenAtom)
     const cartItem = useRecoilValue(cartItemsAtom)
@@ -21,6 +21,6 @@ const CartIcon = memo(() => {
             </span>
         </div>
     )
-})
+}
 
 export default CartIcon

@@ -11,13 +11,14 @@ const CollectionItem = ({ item }) => {
         const isExist = items.find(item => item.id === newItem.id)
 
         if (isExist) {
-            return items.map(item => 
+            setCartItem(items.map(item => 
                 item.id === newItem.id 
                     ? {...item, quantity: item.quantity + 1} 
                     : item
-            )
+            ))
+        } else {
+            setCartItem([...items, { ...newItem, quantity: 1 }])
         }
-        setCartItem(() => [...items, { ...newItem, quantity: 1 }])
     }
 
     return (
@@ -31,10 +32,10 @@ const CollectionItem = ({ item }) => {
                 />
                 <CardContent className="">
                     <div className="mb-2">
-                        <Fragment>{name}</Fragment><br />
-                        <Fragment>{price}$</Fragment>
+                        <>{name}</><br />
+                        <>{price}$</>
                     </div>
-                    <Button  variant="contained" onClick={addItem(cartItem, item)}>
+                    <Button  variant="contained" onClick={() => addItem(cartItem, item)}>
                         ADD TO CART
                     </Button>
                 </CardContent>
