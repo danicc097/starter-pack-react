@@ -49,8 +49,8 @@ const SignIn = () => {
         resolver: yupResolver(schema)
     });
 
-    const email = useInput("", "email", "email", "Email...", "w-75", styles)
-    const password = useInput("", "password", "password", "Password...", "w-75", styles)
+    const email = useInput("", "email", "email", "Email...", "w-100", styles)
+    const password = useInput("", "password", "password", "Password...", "w-100", styles)
 
     const onSubmit = data => signWithEmail.mutate(data);
 
@@ -59,7 +59,7 @@ const SignIn = () => {
         <div className="mt-5">
             <h2 className="mb-4">J'ai déja un Email !</h2>
             <span>Se connecter</span>
-            <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column justify-content-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column">
 
                 <FormControl className="mb-5 mt-5">
                     <Controller
@@ -81,13 +81,13 @@ const SignIn = () => {
                     {errors.password?.type === 'min' && <span className="text-danger">Trop petit</span>}
                 </FormControl>
 
-                <Button size="small" className="w-75 px-5 pt-3 pb-3 mb-2 text-white" type='submit' style={{backgroundColor: 'black'}} disabled={signWithEmail.isLoading}>
+                <Button size="small" className="w-100 px-5 pt-3 pb-3 mb-2 text-white" type='submit' style={{backgroundColor: 'black'}} disabled={signWithEmail.isLoading}>
                     {signWithEmail.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><AlternateEmailIcon /></Box>Se connecter par mail</>}
                 </Button>
-                <Button size="small" className="w-75 px-5 pt-3 pb-3 mb-2" variant="contained" color='error' disabled={signWithGoogle.isLoading} onClick={signWithGoogle.mutate}>
+                <Button size="small" className="w-100 px-5 pt-3 pb-3 mb-2" variant="contained" color='error' disabled={signWithGoogle.isLoading} onClick={signWithGoogle.mutate}>
                     {signWithGoogle.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><GoogleIcon /></Box>Se connecter avec Google</>}
                 </Button>
-                <Button size="small" className="w-75 px-5 pt-3 pb-3" variant="contained" disabled={signWithFacebook.isLoading} onClick={signWithFacebook.mutate}>
+                <Button size="small" className="w-100 px-5 pt-3 pb-3" variant="contained" disabled={signWithFacebook.isLoading} onClick={signWithFacebook.mutate}>
                     {signWithFacebook.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><FacebookIcon /></Box>Se connecter avec Facebook</>}
                 </Button>
                 {signWithEmail.isError && <span className="text-danger">Email ou mot de passe incorrect</span>}

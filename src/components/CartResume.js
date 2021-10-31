@@ -9,24 +9,25 @@ const CartResume = ({ item }) => {
     const addItem = (items, newItem) => {
         const isExist = items.find(item => item.id === newItem.id)
 
-        if (isExist) {
-            setCartItem(items.map(item => 
-                item.id === newItem.id 
+        if (isExist.id > 0) {
+            setCartItem(items.map(item => item.id === newItem.id 
                     ? {...item, quantity: item.quantity + 1} 
                     : item
             ))
+        } else {
+            setCartItem(() => [...items, { ...newItem, quantity: 1 }])
         }
-        setCartItem(() => [...items, { ...newItem, quantity: 1 }])
     }
 
     const removeItem = (items, removeItem) => {
         const itemToRemove = items.find(item => item.id === removeItem.id)
         if (itemToRemove.quantity === 1) {
             setCartItem(items.filter(item => item.id !== removeItem.id))
-        }
-        setCartItem(items.map(item => item.id === removeItem.id 
+        } else {
+            setCartItem(items.map(item => item.id === removeItem.id 
                 ? {...item, quantity: item.quantity - 1} 
                 : item))
+        }
     }
 
     return (

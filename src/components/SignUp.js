@@ -39,10 +39,10 @@ const SignUp = () => {
         resolver: yupResolver(schema)
     });
 
-    const name = useInput("", "name", "text", "Nom...", "w-75", styles)
-    const email = useInput("", "email", "email", "Email...", "w-75", styles)
-    const password = useInput("", "password", "password", "Mot de passe...", "w-75", styles)
-    const confirmPassword = useInput("", "confirmPassword", "password", "Confirmer le mot de passe...", "w-75", styles)
+    const name = useInput("", "name", "text", "Nom...", "w-100", styles)
+    const email = useInput("", "email", "email", "Email...", "w-100", styles)
+    const password = useInput("", "password", "password", "Mot de passe...", "w-100", styles)
+    const confirmPassword = useInput("", "confirmPassword", "password", "Confirmer le mot de passe...", "w-100", styles)
 
     const onSubmit = data => mutate(data);
 
@@ -91,7 +91,7 @@ const SignUp = () => {
                 {errors.confirmPassword?.type === 'oneOf' && <span className="text-danger">Mot de passe différent</span>}
                 </FormControl>
 
-                <Button className="px-5 pt-3 pb-3 m-1" type='submit' disabled={isLoading} variant="outlined">
+                <Button className="w-100 px-5 pt-3 pb-3" type='submit' disabled={isLoading} variant="outlined">
                     {isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><AlternateEmailIcon /></Box>S'inscrire</>}
                 </Button>
                 {isError && <span>Une erreur est survenue. Veuillez réessayer.</span>}
