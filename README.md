@@ -4,7 +4,7 @@
 <a href="https://reactjs.org/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a>
 
 A starter-pack to make your web applications in React.
-This starter pack contains advanced concepts like ...
+This starter pack contains ***advanced concepts** like ...
 
 ### React Query
 
@@ -78,3 +78,20 @@ With React-Hook-Form, you could:
 ```js
     const onSubmit = data => mutate(data);
 ```
+
+### Materiel UI
+
+Material UI allows you to build your own design system and develop React apps faster.
+
+I couldn't describe all the wonderful things that Material UI has to offer in one Readme, but to put it simply:
+
+
+### And soon ...
+
+- Stripe integration
+
+- Paypal integration
+
+- Integration of an API made in Golang (<a href="https://github.com/gmorinn/starter-pack-goa">Starter Pack API</>)
+
+- Integration of advanced concepts of Firebase
