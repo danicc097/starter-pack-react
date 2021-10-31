@@ -83,7 +83,19 @@ With React-Hook-Form, you could:
 
 Material UI allows you to build your own design system and develop React apps faster.
 
-I couldn't describe all the wonderful things that Material UI has to offer in one Readme, but to put it simply:
+I couldn't describe all of the wonderful things that Material UI has to offer in a readme file, but put simply, this is one of the best tools for managing the responsive and design of your app.
+
+A basic example
+```js
+    <Grid container rowSpacing={5} columnSpacing={{ xs: 2, sm: 5, md: 10, xl: 20 }}>
+        <Grid item md={6} sx={{ width: '75%' }}>
+            <SignIn />
+        </Grid>
+        <Grid item md={6} sx={{ width: '75%' }}>
+            <SignUp />
+        </Grid>
+    </Grid>
+```
 
 
 ### And soon ...
