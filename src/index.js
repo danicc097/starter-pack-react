@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
-import { ProvideAuth } from './Hooks/useAuth';
 import ErrorBoundary from "./screen/ErrorBoundary";
 
 import Loader from './components/Loader'
@@ -21,7 +20,6 @@ const queryClient = new QueryClient()
 ReactDOM.render(
   <ErrorBoundary>
     <Suspense fallback={<Loader />}>
-      <ProvideAuth>
         <RecoilRoot>
             <BrowserRouter>
               <QueryClientProvider client={queryClient}>
@@ -29,7 +27,6 @@ ReactDOM.render(
               </QueryClientProvider>
             </BrowserRouter>
         </RecoilRoot>
-      </ProvideAuth>
     </Suspense>
   </ErrorBoundary>,
   document.getElementById('root')

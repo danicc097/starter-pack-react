@@ -3,6 +3,7 @@ import { Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
 import { useRecoilValue } from "recoil";
 import CartResume from "../components/CartResume";
 import { cartItemsAtom } from "../store/cart";
+import StripeButton from "../components/StripeButton";
 
 const Checkout = () => {
     const [displayItem, setDisplayItem] = useState(0)
@@ -30,7 +31,12 @@ const Checkout = () => {
                 }
                 </TableBody>
             </Table>
-            <h4>TOTAL: {displayItem}$</h4>
+            <div>
+                <h4>TOTAL: {displayItem}€</h4>
+                <StripeButton price={displayItem}/>
+                <br />
+                <small className="text-danger">* Carte test: 4242 4242 4242 4242</small>
+            </div>
         </>
     )
 }
