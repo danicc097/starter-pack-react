@@ -13,12 +13,12 @@ const CartDropdown = memo (() => {
 
     return (
         <>
-            <div className="cart-dropdown flex-column position-absolute d-flex overflow-auto">
+            <div className="cart-dropdown flex-column position-absolute d-flex overflow-auto bg-white">
                 { cartItems && cartItems.length > 0 ?
                     cartItems.map(v => {
                         return <CartItem key={v.id} item={v} />
                     }) : 
-                    <span className="d-flex justify-content-center">Card is empty</span>
+                    <span className="d-flex justify-content-center text-dark">Card is empty</span>
                 }
                 <Button variant="contained" color="primary" style={{marginTop: 'auto'}} onClick={() => {
                     setCartHidden(v => !v)
