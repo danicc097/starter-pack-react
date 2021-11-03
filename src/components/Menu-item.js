@@ -7,7 +7,7 @@ const MenuItem = ({ title, md, url, height }) => {
     return (
         <>
         <Grid item md={md} className="pl-4 mb-2">
-            <Card body className="home text-center border border-dark" 
+            <Card className="home text-center border border-dark" 
                 onClick={() => history.push(`/shop/${title}`)}
                 style={{backgroundImage: `url(${url})`, 
                     backgroundPosition: 'center', 

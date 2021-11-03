@@ -13,7 +13,7 @@ const Header = () => {
   const router = useRouter()
   const cartHidden = useRecoilValue(cartHiddenAtom)
   return (
-      <AppBar sx={{ backgroundColor: 'transparent'}} position="fixed">
+      <AppBar sx={{ backgroundColor: 'white'}} position="fixed">
         <Toolbar>
           <Typography variant="a" component="div" sx={{ flexGrow: 1, color: 'black', cursor: 'pointer' }} onClick={() => router.history.push('/')}>
               <WhatshotIcon />

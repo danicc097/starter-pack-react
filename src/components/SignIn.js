@@ -90,9 +90,9 @@ const SignIn = () => {
                 <Button size="small" className="w-100 px-5 pt-3 pb-3" variant="contained" disabled={signWithFacebook.isLoading} onClick={signWithFacebook.mutate}>
                     {signWithFacebook.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><FacebookIcon /></Box>Se connecter avec Facebook</>}
                 </Button>
-                {signWithEmail.isError && <span className="text-danger">Email ou mot de passe incorrect</span>}
-                {signWithGoogle.isError && <span className="text-danger">Erreur survenue lors de la connection avec Google</span>}
-                {signWithFacebook.isError && <span className="text-danger">Erreur survenue lors de la connection avec Facebook</span>}
+                {signWithEmail.isError && <span className="text-danger">* Email ou mot de passe incorrect</span>}
+                {signWithGoogle.isError && <span className="text-danger">* Erreur survenue lors de la connection avec Google</span>}
+                {signWithFacebook.isError && <span className="text-danger">* Erreur survenue lors de la connection avec Facebook</span>}
             </form>
         </div>
         </>

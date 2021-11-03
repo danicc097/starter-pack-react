@@ -5,6 +5,7 @@ import { RecoilRoot } from 'recoil';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 import ErrorBoundary from "./screen/ErrorBoundary";
+import { ProvideAuth } from './Hooks/useAuth';
 
 import Loader from './components/Loader'
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -20,6 +21,7 @@ const queryClient = new QueryClient()
 ReactDOM.render(
   <ErrorBoundary>
     <Suspense fallback={<Loader />}>
+      <ProvideAuth>
         <RecoilRoot>
             <BrowserRouter>
               <QueryClientProvider client={queryClient}>
@@ -27,6 +29,7 @@ ReactDOM.render(
               </QueryClientProvider>
             </BrowserRouter>
         </RecoilRoot>
+      </ProvideAuth>
     </Suspense>
   </ErrorBoundary>,
   document.getElementById('root')
