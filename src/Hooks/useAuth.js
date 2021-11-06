@@ -151,6 +151,32 @@ function useProvideAuth() {
 		})
 	};
 
+	const signWithProvider = async (payload) => {
+		setLoad(true)
+		return await fetch(`${api}/sign-providers`, {
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": `Bearer ${getOAuthToken()}`,
+			},
+			method: "POST",
+			body: JSON.stringify({
+				...payload
+			})
+		}).then(async resp => {
+			if (resp.status === 403) {
+				await getAuthorization().then(async () => await signWithProvider(payload))
+			}
+			return await resp.json()
+		}).then(body => {
+			setLoad(false)
+			setAccessToken(body.access_token);
+			setRefreshToken(body.refresh_token);
+			setUser(getUser(body.access_token));
+			return body;
+		})
+	};
+
+
 	const signup = async (reqBody) => {
 		setLoad(true)
 		let res = await fetch(`${api}/v1/web/signup`, {
@@ -257,6 +283,7 @@ function useProvideAuth() {
 		getAccessToken,
 		loggedIn,
 		refreshToken,
+		signWithProvider,
 		load,
 		user,
 		signup,

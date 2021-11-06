@@ -7,6 +7,7 @@ import useInput from "../Hooks/useInput.js";
 import { useMutation } from "react-query";
 import useRouter from "../Hooks/useRouter.js";
 import * as api from '../firebase/api'
+import { useAuth } from '../Hooks/useAuth'
 import Loader from '../components/Loader'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -21,6 +22,7 @@ const styles = {
 const SignIn = () => {
 
     const router = useRouter()
+    const { signWithProvider } = useAuth()
 
     const signWithEmail = useMutation(api.SigninWithMailAndPassword, {
         onSuccess: () => {
@@ -28,7 +30,7 @@ const SignIn = () => {
         }
     })
 
-    const signWithGoogle = useMutation(api.SignWithGoogle, {
+    const signWithGoogle = useMutation(() => api.SignWithGoogle(signWithProvider), {
         onSuccess: () => {
             router.push('/')
         }
