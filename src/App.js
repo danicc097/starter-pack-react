@@ -12,8 +12,6 @@ const Checkout = lazy(() => import("./screen/checkout"))
 const Sign = lazy(() => import("./screen/sign"))
 
 const App = () => {
-  const auth = useAuth()
-	const user = auth.loggedIn() && auth.user
   return (
     <>
       <Container className="mt-5" maxWidth="xl">
@@ -23,10 +21,7 @@ const App = () => {
                 <Route exact path="/shop" component={ShopPage} />
                 <PrivateRoute exact path="/checkout" component={Checkout} />
                 <Route exact path="/sign" component={Sign} />
-                <Route exact path="/shop/:id" component={CollectionOverview} />
-                <Route exact path="/sign" render={() => 
-                  user ? 
-                    <Redirect to='/' /> : <Sign />} />
+                <Route exact path="/shop/:category" component={CollectionOverview} />
           </Switch>
         </Container>
     </>

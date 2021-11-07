@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { cartItemsAtom } from "../store/cart";
 
 const CollectionItem = ({ item }) => {
-    const { name, price, imageUrl } = item
+    const { name, price, cover } = item
     const [cartItem, setCartItem] = useRecoilState(cartItemsAtom)
 
     const addItem = (items, newItem) => {
@@ -27,7 +27,7 @@ const CollectionItem = ({ item }) => {
                     className="product-items"
                     component="img"
                     height="400"
-                    image={imageUrl}
+                    image={cover}
                     alt="Items"
                 />
                 <CardContent className="">

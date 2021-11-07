@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { useRecoilValue } from "recoil";
-import { collectionAtom } from "../store/shop";
 import PreviewCollection from "./PreviewCollection";
+import { useApi } from '../Hooks/useApi'
+import useRouter from "../Hooks/useRouter";
 
 
 const CollectionOverview = () => {
-    const { id } = useParams()
-    const [collection, setCollection] = useState([])
-    const collections = useRecoilValue(collectionAtom)
+    const { Fetch } = useApi()
+    const { query } = useRouter()
+    const [collections, setCollections] = useState([])
 
     useEffect(() => {
-        collections && setCollection(collections.filter(item => item.routeName === id))
-    }, [collections, id])
+        Fetch(`/web/products/category/${query.category.substring(0,query.category.length-1)}`).then(resp => {
+            if (resp?.success && resp.products) {
+                setCollections(resp.products)
+            }
+        })
+    // eslint-disable-next-line
+    }, [])
 
     return (
         <>
-            {collection && collection.length > 0 && <PreviewCollection {...collection[0]} />}
+            {collections && collections.length > 0 && <PreviewCollection items={collections} />}
         </>
     )
 }
