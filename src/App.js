@@ -1,9 +1,12 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
 import { Container } from '@mui/material';
 import { Switch, Route, Redirect } from "react-router-dom";
 import './App.scss'
 import Header from "./components/Header";
 import { useAuth } from "./Hooks/useAuth";
+import { useApi } from "./Hooks/useApi";
+import { useSetRecoilState } from "recoil";
+import { currentUserAtom } from "./store/user";
 
 const Home = lazy(() => import("./screen/homepage"))
 const ShopPage = lazy(() => import("./screen/shop"))
@@ -12,6 +15,22 @@ const Checkout = lazy(() => import("./screen/checkout"))
 const Sign = lazy(() => import("./screen/sign"))
 
 const App = () => {
+  const setCurrentUser = useSetRecoilState(currentUserAtom)
+  const { user } = useAuth()
+  const { Fetch } = useApi()
+
+
+  useEffect(() => {
+    Fetch(`/web/user/${user.id}`).then(resp => {
+        if (resp?.success && resp.user) {
+          setCurrentUser(resp.user)
+        } else {
+          setCurrentUser(null)
+        }
+    })
+    // eslint-disable-next-line
+  }, [user])
+
   return (
     <>
       <Container className="mt-5" maxWidth="xl">
