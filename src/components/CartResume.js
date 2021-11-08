@@ -9,7 +9,7 @@ const CartResume = ({ item }) => {
     const addItem = (items, newItem) => {
         const isExist = items.find(item => item.id === newItem.id)
 
-        if (isExist.id > 0) {
+        if (isExist.id) {
             setCartItem(items.map(item => item.id === newItem.id 
                     ? {...item, quantity: item.quantity + 1} 
                     : item
@@ -33,7 +33,7 @@ const CartResume = ({ item }) => {
     return (
         <TableRow>
              <TableCell>
-                <img src={item.imageUrl} alt="img" style={{width: '170px'}} />
+                <img src={item.cover} alt="img" style={{width: '170px'}} />
             </TableCell>
             <TableCell>
                 <span>{item.name}</span>

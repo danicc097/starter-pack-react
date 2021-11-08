@@ -20,7 +20,6 @@ const CollectionItem = ({ item }) => {
             setCartItem([...items, { ...newItem, quantity: 1 }])
         }
     }
-
     return (
             <Card>
                 <CardMedia
