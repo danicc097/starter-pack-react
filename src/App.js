@@ -5,7 +5,7 @@ import './App.scss'
 import Header from "./components/Header";
 import { useAuth } from "./Hooks/useAuth";
 import { useApi } from "./Hooks/useApi";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { currentUserAtom } from "./store/user";
 
 const Home = lazy(() => import("./screen/homepage"))
@@ -15,19 +15,19 @@ const Checkout = lazy(() => import("./screen/checkout"))
 const Sign = lazy(() => import("./screen/sign"))
 
 const App = () => {
-  const setCurrentUser = useSetRecoilState(currentUserAtom)
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom)
   const { user } = useAuth()
   const { Fetch } = useApi()
 
 
   useEffect(() => {
-    Fetch(`/web/user/${user.id}`).then(resp => {
-        if (resp?.success && resp.user) {
-          setCurrentUser(resp.user)
+    user && user.id ? Fetch(`/v1/web/user/${user.id}`).then(res => {
+        if (res?.success && res.user) {
+          setCurrentUser(res.user)
         } else {
           setCurrentUser(null)
         }
-    })
+    }) : setCurrentUser(null)
     // eslint-disable-next-line
   }, [user])
 

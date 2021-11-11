@@ -7,7 +7,7 @@ const ShopPage = () => {
     const { Fetch } = useApi()
 
     useEffect(() => {
-        Fetch(`/web/products`).then(resp => {
+        Fetch(`/v1/web/products`).then(resp => {
             if (resp?.success && resp.products) {
                 setShop(resp.products)
             }

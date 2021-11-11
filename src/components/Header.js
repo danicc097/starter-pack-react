@@ -1,17 +1,27 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@mui/material';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { cartHiddenAtom } from '../store/cart';
 import CartDropdown from './CartDropdow';
 import CartIcon from './CartIcon';
 import useRouter from '../Hooks/useRouter'
+import { useAuth } from '../Hooks/useAuth'
 import WhatshotIcon from '@mui/icons-material/Whatshot';
+import { currentUserAtom } from '../store/user';
 
 
 const Header = () => {
   const router = useRouter()
+  const { logout } = useAuth()
   const cartHidden = useRecoilValue(cartHiddenAtom)
+  const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom)
+
+  const Logout = () => {
+    setCurrentUser(null)
+    logout()
+    router.history.push('/sign')
+  }
   return (
       <AppBar sx={{ backgroundColor: 'white'}} position="fixed">
         <Toolbar>
@@ -20,7 +30,12 @@ const Header = () => {
             </Typography>
               <NavLink exact className="text-decoration-none mx-3 text-dark" to="/shop">Shop</NavLink>
               <NavLink exact className="text-decoration-none mx-3 text-dark" to="/contact">Contact</NavLink>
-              <NavLink exact className="text-decoration-none mx-3 text-dark" to="/sign">Sign</NavLink>
+              {
+                currentUser ? 
+                <div className="text-dark mx-auto" style={{cursor: 'pointer'}} onClick={Logout}>Logout</div>
+                  :
+                  <NavLink exact className="text-decoration-none mx-3 text-dark" to="/sign">Sign</NavLink>
+              }
             <div style={{cursor: 'pointer'}}><CartIcon /></div>
             { cartHidden ? null : <CartDropdown />}
         </Toolbar>

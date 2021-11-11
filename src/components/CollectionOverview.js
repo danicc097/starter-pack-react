@@ -10,7 +10,7 @@ const CollectionOverview = () => {
     const [collections, setCollections] = useState([])
 
     useEffect(() => {
-        Fetch(`/web/products/category/${query.category.substring(0,query.category.length-1)}`).then(resp => {
+        Fetch(`/v1/web/products/category/${query.category.substring(0,query.category.length-1)}`).then(resp => {
             if (resp?.success && resp.products) {
                 setCollections(resp.products)
             }

@@ -179,7 +179,7 @@ function useProvideAuth() {
 
 	const signup = async (reqBody) => {
 		setLoad(true)
-		let res = await fetch(`${api}/web/signup`, {
+		let res = await fetch(`${api}/signup`, {
 			headers: {
 				Authorization: `Bearer ${getOAuthToken()}`,
 				"Content-Type": "application/json"
