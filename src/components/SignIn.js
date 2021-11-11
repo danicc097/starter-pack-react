@@ -59,8 +59,8 @@ const SignIn = () => {
     return (
         <>
         <div className="mt-5">
-            <h2 className="mb-4">J'ai déja un Email !</h2>
-            <span>Se connecter</span>
+            <h2 className="mb-4">I already have an email !</h2>
+            <span>Login</span>
             <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column">
 
                 <FormControl className="mb-5 mt-5">
@@ -69,8 +69,8 @@ const SignIn = () => {
                         control={control}
                         render={({ field }) => <Input {...field} {...email.bindInput} />}
                     />
-                    {errors.email?.type === 'required' && <span className="text-danger">Email requis</span>}
-                    {errors.email?.type === 'email' && <span className="text-danger">Mauvais format</span>}
+                    {errors.email?.type === 'required' && <span className="text-danger">Required</span>}
+                    {errors.email?.type === 'email' && <span className="text-danger">Wrong format</span>}
                 </FormControl>
 
                 <FormControl className="mb-5">
@@ -79,22 +79,22 @@ const SignIn = () => {
                             control={control}
                             render={({ field }) => <Input {...field} {...password.bindInput} />}
                         />
-                    {errors.password?.type === 'required' && <span className="text-danger">Mot de passe requis</span>}
-                    {errors.password?.type === 'min' && <span className="text-danger">Trop petit</span>}
+                    {errors.password?.type === 'required' && <span className="text-danger">Required</span>}
+                    {errors.password?.type === 'min' && <span className="text-danger">Too small</span>}
                 </FormControl>
 
                 <Button size="small" className="w-100 px-5 pt-3 pb-3 mb-2 text-white" type='submit' style={{backgroundColor: 'black'}} disabled={signWithEmail.isLoading}>
-                    {signWithEmail.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><AlternateEmailIcon /></Box>Se connecter par mail</>}
+                    {signWithEmail.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><AlternateEmailIcon /></Box>Login by mail</>}
                 </Button>
                 <Button size="small" className="w-100 px-5 pt-3 pb-3 mb-2" variant="contained" color='error' disabled={signWithGoogle.isLoading} onClick={signWithGoogle.mutate}>
-                    {signWithGoogle.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><GoogleIcon /></Box>Se connecter avec Google</>}
+                    {signWithGoogle.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><GoogleIcon /></Box>Login with Google</>}
                 </Button>
                 <Button size="small" className="w-100 px-5 pt-3 pb-3" variant="contained" disabled={signWithFacebook.isLoading} onClick={signWithFacebook.mutate}>
-                    {signWithFacebook.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><FacebookIcon /></Box>Se connecter avec Facebook</>}
+                    {signWithFacebook.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><FacebookIcon /></Box>Login with Facebook</>}
                 </Button>
-                {signWithEmail.isError && <span className="text-danger">* Email ou mot de passe incorrect</span>}
-                {signWithGoogle.isError && <span className="text-danger">* Erreur survenue lors de la connection avec Google</span>}
-                {signWithFacebook.isError && <span className="text-danger">* Erreur survenue lors de la connection avec Facebook</span>}
+                {signWithEmail.isError && <span className="text-danger">* Email or passowrd incorrect</span>}
+                {signWithGoogle.isError && <span className="text-danger">* Error with Google, please try again or contact us.</span>}
+                {signWithFacebook.isError && <span className="text-danger">* Error with Facebook, please try again or contact us.</span>}
             </form>
         </div>
         </>

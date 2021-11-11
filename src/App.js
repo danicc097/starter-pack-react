@@ -7,6 +7,7 @@ import { useAuth } from "./Hooks/useAuth";
 import { useApi } from "./Hooks/useApi";
 import { useRecoilState } from "recoil";
 import { currentUserAtom } from "./store/user";
+import NotFound from "./screen/NotFound";
 
 const Home = lazy(() => import("./screen/homepage"))
 const ShopPage = lazy(() => import("./screen/shop"))
@@ -38,12 +39,13 @@ const App = () => {
           <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/shop" component={ShopPage} />
-                <PrivateRoute exact path="/checkout" component={Checkout} />
-                <Route exact path="/sign" component={Sign} />
                 <Route exact path="/shop/:category" component={CollectionOverview} />
+                <Route exact path="/sign" render={() => currentUser ? <Redirect to='/' /> : <Sign />} />
+                <Route exact component={NotFound} />
+                <PrivateRoute exact path="/checkout" component={Checkout} />
           </Switch>
         </Container>
-    </>
+    </> 
   )
 }
 

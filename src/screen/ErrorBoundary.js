@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Error404 from '../assets/404.jpg'
+import Error404 from '../assets/404.png'
 
 class ErrorBoundary extends Component {
     state = {
@@ -16,8 +16,8 @@ class ErrorBoundary extends Component {
 
     render() {
         if (this.state.hasError) {
-            return <div className="position-relative h-100 w-100">
-                <img src={Error404} alt="404" className="img-fluid" style={{position:'fixed', top: '50%', left:'50%', transform: 'translate(-50%, -50%)'}}/>
+            return <div className="position-relative h-50 w-50">
+                <img src={Error404} alt="404" className="img-fluid" style={{position:'fixed', top: '50%', left:'50%', transform: 'translate(-50%, -50%)', width: '65%'}}/>
             </div>
         }
         return this.props.children
