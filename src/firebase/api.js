@@ -1,18 +1,33 @@
 import { firebase, googleAuthProvider, facebookAuthProvider } from './firebase'
 
-export const SignupWithMailAndPassword = async ({ email, password }) => {
-    await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(res => console.log(res))
+export const SignupWithMailAndPassword = async ({ firstname, lastname, email, password, confirm_password, signup }) => {
+    const body = {
+        firstname,
+        lastname,
+        email,
+        password,
+        confirm_password
+    }
+    await signup(body)
+        .then(res => {
+            if (res?.success) {
+                console.log(res)
+            } else {
+                throw new Error(res)
+            }
+        })
         .catch(err => {throw new Error(err)})
 }
 
-export const SigninWithMailAndPassword = async ({email, password}) => {
-    await firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(res => console.log(res))
+export const SigninWithMailAndPassword = async ({email, password, login}) => {
+    await login(email, password)
+        .then(res => {
+            if (res?.success) {
+                console.log(res)
+            } else {
+                throw new Error(res)
+            }
+        })
         .catch(err => {throw new Error(err)})
 }
 

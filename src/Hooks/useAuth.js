@@ -127,7 +127,7 @@ function useProvideAuth() {
 
 	const login = async (email, password) => {
 		setLoad(true)
-		return await fetch(`${api}/web/signin`, {
+		return await fetch(`${api}/signin`, {
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": `Bearer ${getOAuthToken()}`,
@@ -148,6 +148,10 @@ function useProvideAuth() {
 			setRefreshToken(body.refresh_token);
 			setUser(getUser(body.access_token));
 			return body;
+		})
+		.catch(err => {
+			console.error(err)
+			return err
 		})
 	};
 
@@ -198,6 +202,10 @@ function useProvideAuth() {
 			setRefreshToken(resp.refresh_token);
 			setUser(getUser(resp.access_token));
 			return resp
+		})
+		.catch(err => {
+			console.error(err)
+			return err
 		})
 	}
 

@@ -22,7 +22,7 @@ const styles = {
 const SignIn = () => {
 
     const router = useRouter()
-    const { signWithProvider } = useAuth()
+    const { signWithProvider, login } = useAuth()
 
     const signWithEmail = useMutation(api.SigninWithMailAndPassword, {
         onSuccess: () => {
@@ -54,7 +54,7 @@ const SignIn = () => {
     const email = useInput("", "email", "email", "Email...", "w-100", styles)
     const password = useInput("", "password", "password", "Password...", "w-100", styles)
 
-    const onSubmit = data => signWithEmail.mutate(data);
+    const onSubmit = data => signWithEmail.mutate({ email: data.email, password: data.password, login});
 
     return (
         <>
@@ -92,7 +92,7 @@ const SignIn = () => {
                 <Button size="small" className="w-100 px-5 pt-3 pb-3" variant="contained" disabled={signWithFacebook.isLoading} onClick={signWithFacebook.mutate}>
                     {signWithFacebook.isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><FacebookIcon /></Box>Login with Facebook</>}
                 </Button>
-                {signWithEmail.isError && <span className="text-danger">* Email or passowrd incorrect</span>}
+                {signWithEmail.isError && <span className="text-danger">* Email or password incorrect</span>}
                 {signWithGoogle.isError && <span className="text-danger">* Error with Google, please try again or contact us.</span>}
                 {signWithFacebook.isError && <span className="text-danger">* Error with Facebook, please try again or contact us.</span>}
             </form>

@@ -41,8 +41,8 @@ const App = () => {
                 <Route exact path="/shop" component={ShopPage} />
                 <Route exact path="/shop/:category" component={CollectionOverview} />
                 <Route exact path="/sign" render={() => currentUser ? <Redirect to='/' /> : <Sign />} />
-                <Route exact component={NotFound} />
                 <PrivateRoute exact path="/checkout" component={Checkout} />
+                <Route component={NotFound} />
           </Switch>
         </Container>
     </> 

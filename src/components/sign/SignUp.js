@@ -9,6 +9,7 @@ import { useMutation } from "react-query";
 import Loader from '../Loader'
 import * as api from '../../firebase/api'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
+import { useAuth } from "../../Hooks/useAuth.js";
 
 const styles = {
     outline: '0',
@@ -19,6 +20,7 @@ const styles = {
 const SignUp = () => {
 
     const router = useRouter()
+    const { signup } = useAuth()
 
     const {mutate, isLoading, isError} = useMutation(api.SignupWithMailAndPassword, {
         onSuccess: () => {
@@ -27,11 +29,12 @@ const SignUp = () => {
     })
 
     const schema = yup.object({
-        name: yup.string().required().min(3),
+        firstname: yup.string().required().min(3),
+        lastname: yup.string().required().min(3),
         email: yup.string().email().required(),
         password: yup.string().required().min(7),
         confirmPassword: yup.string().required().min(7)
-            .oneOf([yup.ref('password'), null], 'Mot de passe différent.'),
+            .oneOf([yup.ref('password'), null], 'Password is different.'),
       }).required();
 
 
@@ -39,12 +42,19 @@ const SignUp = () => {
         resolver: yupResolver(schema)
     });
 
-    const name = useInput("", "name", "text", "Name...", "w-100", styles)
+    const firstname = useInput("", "firstname", "text", "Firstname...", "w-100", styles)
+    const lastname = useInput("", "lastname", "text", "Lastname...", "w-100", styles)
     const email = useInput("", "email", "email", "Email...", "w-100", styles)
     const password = useInput("", "password", "password", "Password...", "w-100", styles)
     const confirmPassword = useInput("", "confirmPassword", "password", "Confirm password...", "w-100", styles)
 
-    const onSubmit = data => mutate(data);
+    const onSubmit = data => mutate({   signup, 
+                                        email: data.email,
+                                        firstname: data.firstname,
+                                        lastname: data.lastname,
+                                        password: data.password,
+                                        confirm_password: data.confirm_password,
+                                    });
 
     return (
         <><div className="mt-5">
@@ -53,11 +63,20 @@ const SignUp = () => {
 
                 <FormControl className="mb-5 mt-5">
                     <Controller
-                        {...name.bindHookForm}
+                        {...firstname.bindHookForm}
                         control={control}
-                        render={({ field }) => <Input {...field} {...name.bindInput} />}
+                        render={({ field }) => <Input {...field} {...firstname.bindInput} />}
                     />
-                {errors.name?.type === 'required' && <span className="text-danger">Required</span>}
+                {errors.firstname?.type === 'required' && <span className="text-danger">Required</span>}
+                </FormControl>
+
+                <FormControl className="mb-5 mt-5">
+                    <Controller
+                        {...lastname.bindHookForm}
+                        control={control}
+                        render={({ field }) => <Input {...field} {...lastname.bindInput} />}
+                    />
+                {errors.lastname?.type === 'required' && <span className="text-danger">Required</span>}
                 </FormControl>
 
                 <FormControl className="mb-5 mt-5">
