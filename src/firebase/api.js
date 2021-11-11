@@ -1,12 +1,14 @@
 import { firebase, googleAuthProvider, facebookAuthProvider } from './firebase'
 
-export const SignupWithMailAndPassword = async ({ firstname, lastname, email, password, confirm_password, signup }) => {
+export const SignupWithMailAndPassword = async ({ firstname, lastname, email, password, confirm_password, birthday, phone, signup }) => {
     const body = {
         firstname,
         lastname,
         email,
         password,
-        confirm_password
+        confirm_password,
+        phone,
+        birthday
     }
     await signup(body)
         .then(res => {
