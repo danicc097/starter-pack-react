@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { cartHiddenAtom, cartItemsAtom } from "../store/cart";
+import { cartHiddenAtom, cartItemsAtom } from "../../store/cart";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 
 

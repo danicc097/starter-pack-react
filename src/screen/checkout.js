@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, TableHead, TableRow, TableCell, TableBody, Button } from '@mui/material';
 import { useRecoilValue } from "recoil";
-import CartResume from "../components/CartResume";
+import CartResume from "../components/products/CartResume";
 import { cartItemsAtom } from "../store/cart";
 import StripeButton from "../components/StripeButton";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';

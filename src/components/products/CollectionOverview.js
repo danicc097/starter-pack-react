@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PreviewCollection from "./PreviewCollection";
-import { useApi } from '../Hooks/useApi'
-import useRouter from "../Hooks/useRouter";
+import { useApi } from '../../Hooks/useApi'
+import useRouter from "../../Hooks/useRouter";
 
 
 const CollectionOverview = () => {

@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { cartHiddenAtom } from '../store/cart';
-import CartDropdown from './CartDropdow';
-import CartIcon from './CartIcon';
+import CartDropdown from './products/CartDropdow';
+import CartIcon from './products/CartIcon';
 import useRouter from '../Hooks/useRouter'
 import { useAuth } from '../Hooks/useAuth'
 import WhatshotIcon from '@mui/icons-material/Whatshot';

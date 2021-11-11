@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from '@mui/material';
 import CollectionItem from "./CollectionItem";
-import useRouter from "../Hooks/useRouter";
+import useRouter from "../../Hooks/useRouter";
 
 
 const PreviewCollection = ({ items }) => {

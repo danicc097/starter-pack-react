@@ -7,11 +7,11 @@ import { useAuth } from "./Hooks/useAuth";
 import { useApi } from "./Hooks/useApi";
 import { useRecoilState } from "recoil";
 import { currentUserAtom } from "./store/user";
-import NotFound from "./screen/NotFound";
+import NotFound from "./screen/notFound";
 
 const Home = lazy(() => import("./screen/homepage"))
 const ShopPage = lazy(() => import("./screen/shop"))
-const CollectionOverview = lazy(() => import("./components/CollectionOverview"))
+const CollectionOverview = lazy(() => import("./components/products/CollectionOverview"))
 const Checkout = lazy(() => import("./screen/checkout"))
 const Sign = lazy(() => import("./screen/sign"))
 

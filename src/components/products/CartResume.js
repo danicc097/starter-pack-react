@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import { TableRow, TableCell } from '@mui/material';
-import { cartItemsAtom } from "../store/cart";
+import { cartItemsAtom } from "../../store/cart";
 
 const CartResume = ({ item }) => {
     const [cartItem, setCartItem] = useRecoilState(cartItemsAtom)

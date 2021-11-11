@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PreviewAll from "../components/PreviewAll";
+import PreviewAll from "../components/products/PreviewAll";
 import { useApi } from '../Hooks/useApi'
 
 const ShopPage = () => {

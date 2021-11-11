@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from '@mui/material';
 import { useRecoilValue } from "recoil";
-import { directoryAtom } from "../store/directory";
+import { directoryAtom } from "../../store/directory";
 import MenuItem from "./Menu-item";
 
 const section2 = [

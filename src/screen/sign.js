@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
 import { Grid } from '@mui/material';
-const SignIn = lazy(() => import("../components/SignIn"))
-const SignUp = lazy(() => import( "../components/SignUp"))
+const SignIn = lazy(() => import("../components/sign/SignIn"))
+const SignUp = lazy(() => import( "../components/sign/SignUp"))
 
 
 const Sign = () => {

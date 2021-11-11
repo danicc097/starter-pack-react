@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
-import ErrorBoundary from "./screen/ErrorBoundary";
+import ErrorBoundary from "./screen/errorBoundary";
 import { ProvideAuth } from './Hooks/useAuth';
 
 import Loader from './components/Loader'
@@ -13,7 +13,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 const App = lazy(() => import('./App'))
 
 const g = "color:#00000;font-weight:bold;font-size:18px;";
-const hello = `%c 👋 Hello, \n\n ✔️ Portfolio. \n ✔️ WebSite. \n ✔️ WebApp. \n 🤙 https://guillaume-morin.fr/`;
+const hello = `%c 🤙 https://guillaume-morin.fr/`;
 console.info(hello, g);
 
 const queryClient = new QueryClient()

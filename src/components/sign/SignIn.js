@@ -3,12 +3,12 @@ import { Button, FormControl, Input, Box } from '@mui/material';
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import useInput from "../Hooks/useInput.js";
+import useInput from "../../Hooks/useInput.js";
 import { useMutation } from "react-query";
-import useRouter from "../Hooks/useRouter.js";
-import * as api from '../firebase/api'
-import { useAuth } from '../Hooks/useAuth'
-import Loader from '../components/Loader'
+import useRouter from "../../Hooks/useRouter.js";
+import * as api from '../../firebase/api'
+import { useAuth } from '../../Hooks/useAuth'
+import Loader from '../Loader'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'

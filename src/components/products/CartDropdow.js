@@ -2,9 +2,9 @@ import React, { memo } from "react";
 import { useHistory } from "react-router";
 import { Button } from '@mui/material';
 import CartItem from "./CartItem";
-import '../assets/scss/cartDropDown.scss'
+import '../../assets/scss/cartDropDown.scss'
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { cartHiddenAtom, cartItemsAtom } from "../store/cart";
+import { cartHiddenAtom, cartItemsAtom } from "../../store/cart";
 
 const CartDropdown = memo (() => {
     const cartItems = useRecoilValue(cartItemsAtom)

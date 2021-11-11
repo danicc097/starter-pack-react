@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Card, CardMedia, Button, CardContent } from '@mui/material';
 import { useRecoilState } from "recoil";
-import { cartItemsAtom } from "../store/cart";
+import { cartItemsAtom } from "../../store/cart";
 
 const CollectionItem = ({ item }) => {
     const { name, price, cover } = item

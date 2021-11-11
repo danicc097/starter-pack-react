@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, FormControl, Input, Box } from '@mui/material';
-import useInput from "../Hooks/useInput.js";
+import useInput from "../../Hooks/useInput.js";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import useRouter from "../Hooks/useRouter.js";
+import useRouter from "../../Hooks/useRouter.js";
 import { useMutation } from "react-query";
-import Loader from '../components/Loader'
-import * as api from '../firebase/api'
+import Loader from '../Loader'
+import * as api from '../../firebase/api'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 
 const styles = {
