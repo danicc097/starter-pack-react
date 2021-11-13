@@ -1,4 +1,5 @@
 import { firebase, googleAuthProvider, facebookAuthProvider } from './firebase'
+import moment from 'moment'
 
 export const SignupWithMailAndPassword = async ({ firstname, lastname, email, password, confirm_password, birthday, phone, signup }) => {
     const body = {
@@ -8,7 +9,7 @@ export const SignupWithMailAndPassword = async ({ firstname, lastname, email, pa
         password,
         confirm_password,
         phone,
-        birthday
+        birthday: birthday ? moment(birthday).format('DD-MM-YYYY') : null,
     }
     await signup(body)
         .then(res => {

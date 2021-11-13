@@ -8,6 +8,7 @@ import CartIcon from './products/CartIcon';
 import useRouter from '../Hooks/useRouter'
 import { useAuth } from '../Hooks/useAuth'
 import WhatshotIcon from '@mui/icons-material/Whatshot';
+import { toast } from 'react-toastify';
 import { currentUserAtom } from '../store/user';
 
 
@@ -20,6 +21,16 @@ const Header = () => {
   const Logout = () => {
     setCurrentUser(null)
     logout()
+    toast.info('Disconnected!', {
+      position: "top-left",
+      theme: "dark",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
     router.history.push('/sign')
   }
   return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PreviewCollection from "./PreviewCollection";
 import { useApi } from '../../Hooks/useApi'
 import useRouter from "../../Hooks/useRouter";
-
+import ErrorIcon from '@mui/icons-material/Error';
 
 const CollectionOverview = () => {
     const { Fetch } = useApi()
@@ -20,7 +20,16 @@ const CollectionOverview = () => {
 
     return (
         <>
-            {collections && collections.length > 0 && <PreviewCollection items={collections} />}
+            {collections && collections.length > 0 ? 
+                <PreviewCollection items={collections} />
+                :
+                <div className="w-100 h-100">
+                    <h3 className="text-center p-5 mt-auto">
+                        <span><ErrorIcon fontSize='large'/> </span>
+                        No product available.
+                    </h3>
+            </div>
+            }
         </>
     )
 }

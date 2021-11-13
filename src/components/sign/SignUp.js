@@ -6,15 +6,15 @@ import useInput from "../../Hooks/useInput.js";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/material.css'
 import * as yup from "yup";
 import useRouter from "../../Hooks/useRouter.js";
 import { useMutation } from "react-query";
+import { toast } from 'react-toastify';
 import Loader from '../Loader'
 import * as api from '../../firebase/api'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { useAuth } from "../../Hooks/useAuth.js";
-
 
 const styles = {
     outline: '0',
@@ -29,6 +29,16 @@ const SignUp = () => {
 
     const {mutate, isLoading, isError} = useMutation(api.SignupWithMailAndPassword, {
         onSuccess: () => {
+            toast.success("You're connected!", {
+                position: "top-left",
+                theme: "dark",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             router.push('/')
         }
     })
@@ -106,6 +116,7 @@ const SignUp = () => {
                                 className="w-100"
                                 label="Birthday"
                                 value={birthday}
+                                type="date"
                                 inputFormat="MM/dd/yyyy"
                                 onChange={newBirthday => setBirthday(newBirthday)}
                                 renderInput={(params) => <TextField {...params} />}
@@ -129,8 +140,7 @@ const SignUp = () => {
                             <PhoneInput
                                 value={phone}
                                 country={'fr'}
-                                onlyCountries={['fr', 're']}
-                                placeholder="Phone number"
+                                onlyCountries={['fr', 're', 'be', 'yt', 'gf', 'pf', 'tf', 'mu']}
                                 onChange={newPhone => setPhone(newPhone)}
                             />
                         </Box>

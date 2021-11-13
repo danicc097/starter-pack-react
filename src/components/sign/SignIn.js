@@ -8,6 +8,7 @@ import { useMutation } from "react-query";
 import useRouter from "../../Hooks/useRouter.js";
 import * as api from '../../firebase/api'
 import { useAuth } from '../../Hooks/useAuth'
+import { toast } from 'react-toastify';
 import Loader from '../Loader'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -26,18 +27,48 @@ const SignIn = () => {
 
     const signWithEmail = useMutation(api.SigninWithMailAndPassword, {
         onSuccess: () => {
+            toast.success("You're connected!", {
+                position: "top-left",
+                autoClose: 3000,
+                theme: "dark",
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             router.push('/')
         }
     })
 
     const signWithGoogle = useMutation(() => api.SignWithGoogle(signWithProvider), {
         onSuccess: () => {
+            toast.success("You're connected!", {
+                position: "top-left",
+                theme: "dark",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             router.push('/')
         }
     })
 
     const signWithFacebook = useMutation(api.SignWithFacebook, {
         onSuccess: () => {
+            toast.success("You're connected!", {
+                position: "top-left",
+                theme: "dark",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             router.push('/')
         }
     })

@@ -8,6 +8,8 @@ import { useApi } from "./Hooks/useApi";
 import { useRecoilState } from "recoil";
 import { currentUserAtom } from "./store/user";
 import NotFound from "./screen/notFound";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = lazy(() => import("./screen/homepage"))
 const ShopPage = lazy(() => import("./screen/shop"))
@@ -15,11 +17,12 @@ const CollectionOverview = lazy(() => import("./components/products/CollectionOv
 const Checkout = lazy(() => import("./screen/checkout"))
 const Sign = lazy(() => import("./screen/sign"))
 
+toast.configure();
+
 const App = () => {
   const [currentUser, setCurrentUser] = useRecoilState(currentUserAtom)
   const { user } = useAuth()
   const { Fetch } = useApi()
-
 
   useEffect(() => {
     user && user.id ? Fetch(`/v1/web/user/${user.id}`).then(res => {
