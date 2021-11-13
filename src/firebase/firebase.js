@@ -4,13 +4,13 @@ import 'firebase/compat/database'
 import 'firebase/compat/storage'
 
 var firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID
+  apiKey: "AIzaSyBbSfDw1SnV4Nd9h5m-jwDMAgDoPPPzB0k",
+  authDomain: "starterpack-85abc.firebaseapp.com",
+  databaseURL: "https://starterpack-85abc-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "starterpack-85abc",
+  storageBucket: "starterpack-85abc.appspot.com",
+  messagingSenderId: "354625368863",
+  appId: "1:354625368863:web:318752b113f868c63e762a"
 };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
