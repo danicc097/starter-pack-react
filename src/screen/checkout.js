@@ -22,9 +22,9 @@ const Checkout = () => {
             displayItem <= 0 ? 
                 <div className="text-center p-5">
                     <RemoveShoppingCartIcon fontSize="large" className="mb-4" />
-                    <h2 className="mb-4">Votre panier est vide.</h2> 
+                    <h2 className="mb-4">Your shopping cart is empty</h2> 
                     <Button size="small" className="px-4 pt-2 pb-2" variant="outlined" onClick={() => router.push('/shop')}>
-                        Achetez maintenant!
+                        Buy Now !
                     </Button>
                 </div> :
                 <>
@@ -44,11 +44,10 @@ const Checkout = () => {
                         }
                         </TableBody>
                     </Table>
-                    <div>
-                        <h4>TOTAL: {displayItem}€</h4>
-                        <StripeButton price={displayItem}/>
-                        <br />
-                        <small className="text-danger">* Carte test: 4242 4242 4242 4242</small>
+                    <div className="d-flex flex-column mt-4">
+                        <h4 className="d-flex justify-content-end mb-2">TOTAL: {displayItem}€</h4>
+                        <StripeButton price={displayItem} />
+                        <small className="text-danger d-flex justify-content-end">* Carte test: 4242 4242 4242 4242</small>
                     </div>
                 </>
             }

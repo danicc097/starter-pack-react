@@ -12,11 +12,11 @@ const StripeButton = ({ price }) => {
     }
 
     return (
-        <>
+        <div className="d-flex justify-content-end mb-2">
             <StripeCheckout
-                label="Payez Maintenant"
-                panelLabel="Payez Maintenant"
-                description={`Montant de ${price} euros.`}
+                label="Pay Now"
+                panelLabel="Pay Now"
+                description={`${price} euros.`}
                 token={onToken}
                 shippingAddress
                 billingAddress
@@ -28,10 +28,10 @@ const StripeButton = ({ price }) => {
                 stripeKey={publishKey}
            >
                 <Button size="small" className="px-4 pt-2 pb-2 text-white" type='submit' variant="contained">
-                    Payez Maintenant
+                    Pay Now
                 </Button>
            </StripeCheckout>
-        </>
+        </div>
     )
 }
 

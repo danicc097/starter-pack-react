@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import { Button, FormControl, Input, Box, Grid, TextField } from '@mui/material';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { LocalizationProvider, DatePicker } from '@mui/lab';
+import React from "react";
+import { Button, Box, Grid } from '@mui/material';
 import useInput from "../../Hooks/useInput.js";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/material.css'
 import * as yup from "yup";
 import useRouter from "../../Hooks/useRouter.js";
@@ -15,6 +12,7 @@ import Loader from '../Loader'
 import * as api from '../../firebase/api'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { useAuth } from "../../Hooks/useAuth.js";
+import UseFormGroup from "../../Hooks/useFormGroup.js";
 
 const styles = {
     outline: '0',
@@ -27,7 +25,7 @@ const SignUp = () => {
     const router = useRouter()
     const { signup } = useAuth()
 
-    const {mutate, isLoading, isError} = useMutation(api.SignupWithMailAndPassword, {
+    const {mutate, isLoading, isError, error} = useMutation(api.SignupWithMailAndPassword, {
         onSuccess: () => {
             toast.success("You're connected!", {
                 position: "top-left",
@@ -47,8 +45,10 @@ const SignUp = () => {
         firstname: yup.string().required().min(3),
         lastname: yup.string().required().min(3),
         email: yup.string().email().required(),
+        birthday: yup.string(),
+        phone: yup.string(),
         password: yup.string().required().min(7),
-        confirmPassword: yup.string().required().min(7)
+        confirm_password: yup.string().required().min(7)
             .oneOf([yup.ref('password'), null], 'Password is different.'),
       }).required();
 
@@ -61,18 +61,18 @@ const SignUp = () => {
     const lastname = useInput("", "lastname", "text", "Lastname...", "w-100", styles)
     const email = useInput("", "email", "email", "Email...", "w-100", styles)
     const password = useInput("", "password", "password", "Password...", "w-100", styles)
-    const confirmPassword = useInput("", "confirmPassword", "password", "Confirm password...", "w-100", styles)
-    const [birthday, setBirthday] = useState(null);
-    const [phone, setPhone] = useState(null);
+    const confirm_password = useInput("", "confirm_password", "password", "Confirm password...", "w-100", styles)
+    const phone = useInput("", "phone", "phone", "Phone number...", "w-100")
+    const birthday = useInput(null, "birthday", "date", "Birthday...", "w-100")
 
     const onSubmit = data => mutate({   signup, 
                                         email: data.email,
                                         firstname: data.firstname,
                                         lastname: data.lastname,
                                         password: data.password,
-                                        confirm_password: data.confirmPassword,
-                                        phone: phone,
-                                        birthday: birthday
+                                        confirm_password: data.confirm_password,
+                                        phone: data.phone,
+                                        birthday: data.emailbirthday
                                     });
 
     return (
@@ -81,88 +81,54 @@ const SignUp = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column">
 
             <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 5 }}>
-                <Grid item md={6}>
-                    <FormControl className="mb-5 mt-5" sx={{ m: 2 }} >
-                        <Controller
-                            {...firstname.bindHookForm}
-                            control={control}
-                            render={({ field }) => <Input {...field} {...firstname.bindInput} />}
-                        />
+                <Grid item md={6} className="mb-4">
+                    <UseFormGroup bind={firstname} control={control} />
                     {errors.firstname?.type === 'required' && <span className="text-danger">Required</span>}
-                    </FormControl>
+                </Grid>
 
-                    <FormControl className="mb-5 mt-5" sx={{ m: 2 }}>
-                        <Controller
-                            {...lastname.bindHookForm}
-                            control={control}
-                            render={({ field }) => <Input {...field} {...lastname.bindInput} />}
-                        />
+               <Grid item md={6} className="mb-4">
+                    <UseFormGroup bind={lastname} control={control} />
                     {errors.lastname?.type === 'required' && <span className="text-danger">Required</span>}
-                    </FormControl>
+                </Grid>
 
-                    <FormControl className="mb-5 mt-5" sx={{ m: 2 }}>
-                        <Controller
-                            {...password.bindHookForm}
-                            control={control}
-                            render={({ field }) => <Input {...field} {...password.bindInput} />}
-                        />
+                <Grid item md={6} className="mb-4">
+                    <UseFormGroup bind={password} control={control} />
                     {errors.password?.type === 'required' && <span className="text-danger">Required</span>}
                     {errors.password?.type === 'min' && <span className="text-danger">Too small</span>}
-                    </FormControl>
-
-                    <FormControl className="mb-5 mt-5">
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                className="w-100"
-                                label="Birthday"
-                                value={birthday}
-                                type="date"
-                                inputFormat="MM/dd/yyyy"
-                                onChange={newBirthday => setBirthday(newBirthday)}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                        </LocalizationProvider>
-                    </FormControl>
                 </Grid>
+
+                <Grid item md={6} className="mb-4">
+                    <UseFormGroup bind={confirm_password} control={control} />
+                    {errors.confirm_password?.type === 'required' && <span className="text-danger">Required</span>}
+                    {errors.confirm_password?.type === 'min' && <span className="text-danger">Too small</span>}
+                    {errors.confirm_password?.type === 'oneOf' && <span className="text-danger">Wrong password</span>}
+                </Grid>
+
+                <Grid item md={6} className="mb-4">
+                    <UseFormGroup 
+                        date
+                        bind={birthday}
+                        format="MM/dd/yyyy"
+                        label="Birthday"
+                    />
+                </Grid>
+
                 <Grid item md={6}>
-                    <FormControl className="mb-5 mt-5" sx={{ m: 2 }}>
-                        <Controller
-                            {...email.bindHookForm}
-                            control={control}
-                            render={({ field }) => <Input {...field} {...email.bindInput} />}
-                        />
+                    <UseFormGroup bind={email} control={control} />
                     {errors.email?.type === 'required' && <span className="text-danger">Required</span>}
                     {errors.email?.type === 'email' && <span className="text-danger">Wrong format</span>}
-                    </FormControl>
-
-                    <FormControl className="mb-5 mt-5" sx={{ m: 2 }}>
-                        <Box>
-                            <PhoneInput
-                                value={phone}
-                                country={'fr'}
-                                onlyCountries={['fr', 're', 'be', 'yt', 'gf', 'pf', 'tf', 'mu']}
-                                onChange={newPhone => setPhone(newPhone)}
-                            />
-                        </Box>
-                    </FormControl>
-
-                    <FormControl className="mb-5 mt-5" sx={{ m: 2 }}>
-                        <Controller
-                            {...confirmPassword.bindHookForm}
-                            control={control}
-                            render={({ field }) => <Input {...field} {...confirmPassword.bindInput} />}
-                        />
-                    {errors.confirmPassword?.type === 'required' && <span className="text-danger">Required</span>}
-                    {errors.confirmPassword?.type === 'min' && <span className="text-danger">Too small</span>}
-                    {errors.confirmPassword?.type === 'oneOf' && <span className="text-danger">Wrong password</span>}
-                    </FormControl>
                 </Grid>
+
+                <Grid item md={6} className="mb-4">
+                    <UseFormGroup bind={phone} phone control={control}/>
+                </Grid>
+
             </Grid>
 
                 <Button className="w-100 px-5 pt-3 pb-3" type='submit' disabled={isLoading} variant="outlined">
                     {isLoading ? <Loader /> : <><Box component="i" marginRight="1rem"><AlternateEmailIcon /></Box>Register</>}
                 </Button>
-                {isError && <span>Error. Please try again.</span>}
+                {isError && <span className="text-danger text-center">{error}</span>}
             </form>
         </div>
     )

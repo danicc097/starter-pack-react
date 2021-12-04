@@ -43,7 +43,7 @@ const Header = () => {
               <NavLink exact className="text-decoration-none mx-3 text-dark" to="/contact">Contact</NavLink>
               {
                 currentUser ? 
-                <div className="text-dark mx-auto" style={{cursor: 'pointer'}} onClick={Logout}>Logout</div>
+                <div className="text-dark mx-3" style={{cursor: 'pointer'}} onClick={Logout}>Logout</div>
                   :
                   <NavLink exact className="text-decoration-none mx-3 text-dark" to="/sign">Sign</NavLink>
               }

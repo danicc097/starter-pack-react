@@ -1,5 +1,6 @@
-import { firebase, googleAuthProvider, facebookAuthProvider } from './firebase'
+import { firebase, googleAuthProvider } from './firebase'
 import moment from 'moment'
+import Err from '../utils/humanResp'
 
 export const SignupWithMailAndPassword = async ({ firstname, lastname, email, password, confirm_password, birthday, phone, signup }) => {
     const body = {
@@ -13,25 +14,17 @@ export const SignupWithMailAndPassword = async ({ firstname, lastname, email, pa
     }
     await signup(body)
         .then(res => {
-            if (res?.success) {
-                console.log(res)
-            } else {
-                throw new Error(res)
-            }
+            if (res?.success) console.log("Connected")
+            else { throw Err(res) }
         })
-        .catch(err => {throw new Error(err)})
 }
 
 export const SigninWithMailAndPassword = async ({email, password, login}) => {
     await login(email, password)
         .then(res => {
-            if (res?.success) {
-                console.log(res)
-            } else {
-                throw new Error(res)
-            }
+            if (res?.success) console.log("connected!")
+             else { throw Err(res) }
         })
-        .catch(err => {throw new Error(err)})
 }
 
 export const SignWithGoogle = async (signWithProvider) => {
@@ -51,17 +44,8 @@ export const SignWithGoogle = async (signWithProvider) => {
                     }
                     await signWithProvider(payload)
                         .then(res => console.log(res))
-                        .catch(err => {throw new Error(err)})
+                        .catch(err => { throw Err(err) })
                 }
             }
         })
-        .catch(err => {throw new Error(err)})
-}
-
-export const SignWithFacebook = async () => {
-    await firebase
-        .auth()
-        .signInWithPopup(facebookAuthProvider)
-        .then(res => console.log(res))
-        .catch(err => {throw new Error(err)})
 }
