@@ -8,7 +8,6 @@ const PreviewAll = ({ title, items }) => {
         <h1 className="w-100">{title}</h1>
             {items && items.length > 0 && items
                 .filter(v => v.category === title.toLowerCase())
-                .filter((item, i) => i < 4)
                 .map(v => {
                     return  (
                     <Grid item xs={6} md={3} key={v.id} >

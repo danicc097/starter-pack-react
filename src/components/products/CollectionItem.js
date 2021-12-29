@@ -26,7 +26,7 @@ const CollectionItem = ({ item }) => {
                     className="product-items"
                     component="img"
                     height="400"
-                    image={cover}
+                    image={cover.substring(0, 4) !== "http" ? process.env.REACT_APP_API_URL + cover : cover}
                     alt="Items"
                 />
                 <CardContent className="">
